@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  phishnet:
+    build: .
+    container_name: phishnet
+    ports: ["8000:8000"]
+    volumes:
+      - ./models:/opt/phishnet/models:ro
+      - ./configs:/etc/phishnet:ro
+    environment:
+      - PHISHNET_MODEL_PATH=/opt/phishnet/models/phishnet.onnx
+      - PHISHNET_LOG_LEVEL=INFO
+    restart: unless-stopped

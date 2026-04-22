@@ -1,0 +1,29 @@
+model:
+  algorithm: lightgbm
+  n_estimators: 300
+  learning_rate: 0.05
+  max_depth: 7
+  num_leaves: 63
+  min_child_samples: 20
+  subsample: 0.8
+  colsample_bytree: 0.8
+  reg_alpha: 0.1
+  reg_lambda: 1.0
+  random_state: 42
+  classification_threshold: 0.5
+
+serving:
+  host: "0.0.0.0"
+  port: 8000
+  model_path: "models/phishnet.onnx"
+  max_batch_size: 64
+  request_timeout_ms: 100
+
+drift:
+  reference_data_path: "data/reference_features.parquet"
+  window_size: 1000
+  drift_threshold: 0.05
+  report_output_dir: "reports"
+
+data_dir: "data"
+log_level: "INFO"
